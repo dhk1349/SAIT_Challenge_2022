@@ -28,11 +28,11 @@ class SAIT_dataset(Dataset):
         return len(self.inputs)
 
     def __getitem__(self, idx):
-        inputs = [self.transform(Image.open(f"{self.inputs[idx]}_itr{i}.png")) for i in range(4)]  # 파일명 끝에 iter0, iter1 같은거 붙여줌
+        inputs = [self.transform(Image.open(f"{self.inputs[idx]}_itr{i}.png")) / 255 for i in range(4)]  # 파일명 끝에 iter0, iter1 같은거 붙여줌
         if self.mode != "Test":
             gt = self.transform(Image.open(self.gt[idx]))
-            return inputs, gt
-        return inputs
+            return inputs, gt / 255
+        return inputs, self.inputs[idx]
 
 
 if __name__ == "__main__":
