@@ -41,9 +41,16 @@ if __name__ == "__main__":
 
     imgs, gt = next(iter(train_dataloader))
     print(f"SEM batch shape: {imgs[0].size()}")  # bs, 1, 66, 45
+    print(len(imgs))
     print(f"gt batch shape: {gt.size()}")
-    # img = train_features[0].squeeze()
-    # label = train_labels[0]
-    # plt.imshow(img, cmap="gray")
-    # plt.show()
-    # print(f"Label: {label}")
+
+    n = 5
+    f = plt.figure()
+    lst = [imgs[0][0].squeeze(), imgs[1][0].squeeze(), imgs[2][0].squeeze(), imgs[3][0].squeeze(), gt[0].squeeze()]
+    for i in range(n):
+        # Debug, plot figure
+        f.add_subplot(1, n, i + 1)
+        plt.imshow(lst[i], cmap="gray")
+
+    plt.show(block=True)
+
